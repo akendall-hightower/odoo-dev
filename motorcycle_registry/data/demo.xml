@@ -1,0 +1,29 @@
+<odoo noupdate="1">
+    <data>
+        <record id="demo1" model="motorcycle_registry.motorcycle_registry">
+            <field name="current_mileage">250</field>
+            <field name="first_name">1 fname</field>
+            <field name="last_name">1 lname</field>
+            <field name="registry_number">1 regnum</field>
+            <field name="vin">1 vin</field>
+        </record>
+
+        <record id="demo2" model="motorcycle_registry.motorcycle_registry">
+            <field name="current_mileage">5250</field>
+            <field name="date_registry">2023-01-27</field>
+            <field name="first_name">2 fname</field>
+            <field name="last_name">2 lname</field>
+            <field name="registry_number">2 regnum</field>
+            <field name="vin">2 vin</field>
+        </record>
+
+        <record id="demo3" model="motorcycle_registry.motorcycle_registry">
+            <field name="current_mileage">23250</field>
+            <field name="date_registry" eval="(Datetime.Today() - relativedelta(months=1)).strftime('%Y-%m-%d')"></field>
+            <field name="first_name">3 fname</field>
+            <field name="last_name">3 lname</field>
+            <field name="registry_number">3 regnum</field>
+            <field name="vin">3 vin</field>
+        </record>
+    </data>
+</odoo>
