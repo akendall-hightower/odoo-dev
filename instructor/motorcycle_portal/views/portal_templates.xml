@@ -1,0 +1,131 @@
+<odoo>
+    <!-- Adds Garage Button to Portal Home -->
+    <template id="portal_my_home" name="Show Garage" customize_show="True" inherit_id="portal.portal_my_home" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/motorcycle_registry/static/description/icon.png'"/>
+                <t t-set="title">My Garage</t>
+                <t t-set="url" t-value="'/my/garage'"/>
+                <t t-set="text">Check your motorcycle garage.</t>
+                <t t-set="placeholder_count" t-value="'garage_count'"/>
+            </t>
+        </xpath>            
+    </template>
+
+    <!-- Inherit Breadcrumbs Template and add Garage and record to breadcrumbs if needed -->
+    <template id="portal_layout" name="Portal breadcrumb: garage" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'garage' or doc" class="col-lg-2" t-attf-class="breadcrumb-item #{'active ' if not doc else ''}">
+                <a t-if="doc" t-attf-href="/my/garage?{{ keep_query() }}">My Garage</a>
+                <t t-else="">My Garage</t>
+            </li>
+            <li t-if="doc" class="breadcrumb-item active text-truncate col-8 col-lg-10">
+                <t t-esc="doc.registry_number"/>
+            </li>
+        </xpath>
+    </template>
+    
+    <!-- Portal List View -->
+    <template id="my_garage" name="My Garage">
+        <!-- Add Portal Layout to the Page -->
+        <t t-call="portal.portal_layout">
+            <!-- Garage Table View -->
+            <t t-if="motorcycles" t-call="portal.portal_table">
+                <thead>
+                    <tr>
+                        <th>Registry Number</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>VIN</th>
+                        <th>License Plate</th>
+                        <th>Registration Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="motorcycles" t-as="doc">
+                        <td>
+                            <a t-attf-href="/my/garage/{{slug(doc)}}">
+                                <span t-field="doc.registry_number"/>
+                            </a>
+                        </td>
+                        <td>
+                            <span t-field="doc.make"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.model"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.vin"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.license_plate"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.registry_date"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </t>
+            <t t-else="">
+                <div class="alert alert-warning" role="alert">There are no motorcycles in your Garage.</div>
+            </t>
+        </t>
+    </template>
+
+    <!-- Portal Record View -->
+    <!-- This template needs to be upgraded to O18-->
+    <template id="my_motorcycle" name="My Motorcycle" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <p>This is a WIP</p>
+            <!-- <t t-call="portal.portal_layout">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="card_header">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-truncate"
+                                    t-field="doc.registry_number" />
+                            </div>
+                        </div>
+                    </t> -->
+                    <!-- <t t-set="card_body">
+                        Owner details
+                        <div class="row">
+                            <strong>Owner</strong>
+                        </div>
+                        <div class="row">
+                            <div t-if="doc.owner_id.image_1024"
+                                class="col flex-grow-0">
+                                <img class="rounded-circle mt-1 o_portal_contact_img"
+                                    t-att-src="image_data_uri(doc.owner_id.image_1024)"
+                                    alt="Contact"/>
+                            </div>
+                            <div class="col pl-sm-0">
+                                <address t-field="doc.owner_id"
+                                    t-options='{
+                                    "widget": "contact",
+                                    "fields": ["name", "email",
+                                    "phone"]
+                                    }' />
+                            </div>
+                        </div>
+                        Motorcycle Data 
+                        <div class="row">
+                            <strong>Motorcycle Data</strong>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <ul>
+                                    <li><span t-field="doc.vin" /></li>
+                                    <li><span t-field="doc.make" /></li>
+                                    <li><span t-field="doc.model" /></li>
+                                    <li><span t-field="doc.license_plate" /></li>
+                                    <li><span t-field="doc.registry_date" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t> -->
+                <!-- </t>
+            </t> -->
+        </xpath>
+    </template> 
+</odoo>

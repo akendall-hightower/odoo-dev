@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Enable the Advanced Product Priceliste Feature before creating the new pricelist. This removes the disabling pricelist feature warning popup that generates multiple errors in the UI Tests.-->
+        <record id="ir_config_setting_pricelist_active" model="res.config.settings">
+            <field name="group_product_pricelist">True</field>
+        </record>
+        <function model="res.config.settings" name="execute" eval="[[ref('ir_config_setting_pricelist_active')]]"/>
+        <record model="product.pricelist" id="new_customer_pricelist">
+            <field name="name">New Customer Pricelist</field>
+        </record>
+        <record model="product.pricelist.item" id="new_customer_pricelist_details">
+            <field name="pricelist_id" ref="new_customer_pricelist"/>
+            <field name="compute_price">formula</field>
+            <field name="base">list_price</field>
+            <field name="price_surcharge">-2500</field>
+            <field name="price_discount">0</field>
+            <field name="currency_id" ref="base.USD"/>
+        </record>
+ 
+    </data>
+</odoo>
