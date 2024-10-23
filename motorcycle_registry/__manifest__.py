@@ -11,7 +11,7 @@ This Module is used to keep track of the Motorcycle Reistration and Ownership of
     "license": "OPL-1",
     "depends": ["base"], 
     "data": [
-        "security/motorcycle_registry_groups.xml",
+        "security/registry_groups.xml",
         "security/ir.model.access.csv",
         'data/registry_data.xml',
         "views/motorcycle_registry_menuitems.xml",
