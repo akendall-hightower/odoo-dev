@@ -10,16 +10,57 @@
                     <h1><field name="registry_number"/></h1>
                     <group>
                         <group>
-                            <separator string="Regisry Settings"/>
                             <separator string="Motorcycle Information"/>
                             <field name="registry_date"/>
                             <field name="vin"/>
                             <field name="current_mileage"/>
                             <field name="license_plate"/>
+                            <field name="make"/>
+                            <field name="model"/>
+                            <field name="year"/>
+                        </group>
+                        <group>
+                            <separator string="Registry Settings"/>
+                            <field name="owner_id"/>
+                            <field name="owner_phone"/>
+                            <field name="owner_email"/>                            
                         </group>
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    
+    <record id="motorcycle_registry_view_list" model="ir.ui.view">
+        <field name="name">motorcycle.registry.view.list</field>
+        <field name="model">motorcycle.registry</field>
+        <field name="arch" type="xml">
+            <list string="Registry List">
+                <field name="registry_number"/>
+                <field name="vin"/>
+                <field name="make"/>
+                <field name="model"/>
+                <field name="license_plate"/>
+                <field name="owner_id"/>
+                <field name="first_name"/>
+                <field name="last_name" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="motorcycle_registry_view_search" model="ir.ui.view">
+        <field name="name">motorcycle.registry.view.search</field>
+        <field name="model">motorcycle.registry</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="registry_number"/>
+                <field name="vin"/>
+                <field name="last_name"/>
+                <field name="license_plate"/>
+                <filter name="groupby" string="Date" context="{'group_by': 'registry_date'}"/>
+            </search>
         </field>
     </record>
 </odoo>
@@ -49,15 +90,13 @@
                             <field name="owner_id"/>
                             <field name="owner_phone" widget='phone'/>
                             <field name="owner_email" widget='email'/>
-<!--                             <field name="last_name"/> -->
-<!--
+<!-                             <field name="last_name"/> ->
                         </group>
                     </group>
                     <notebook>
                         <page string="Related Documents">
                             <group>
-                                <!-- <field name="certificate_title_fname"/> -->
-<!--
+                                <!- <field name="certificate_title_fname"/> ->
                                 <field name="certificate_title" filename="certificate_title_fname"/>
                             </group>
                         </page>
@@ -79,9 +118,8 @@
                 <field name="model"/>
                 <field name="license_plate"/>
                 <field name="owner_id"/>
-<!--                 <field name="first_name"/>
-                <field name="last_name"/> -->
-<!--
+                <field name="first_name"/>
+                <field name="last_name"/> ->
                 <field name="current_mileage" optional="hide"/>
             </list>
         </field>

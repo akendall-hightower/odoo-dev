@@ -15,8 +15,8 @@ class MotorcycleRegistry(models.Model):
     
     registry_number = fields.Char('Registry Number', copy=False, required=True, readonly=True, default='New')
     vin = fields.Char(string='VIN',copy=False)
-    # first_name = fields.Char(string='First Name', required=True)
-    # last_name = fields.Char(string='Last Name', required=True)
+    first_name = fields.Char(string='First Name', required=False)
+    last_name = fields.Char(string='Last Name', required=False)
     picture = fields.Image(string='Photograph')
     current_mileage = fields.Float(string='Current Mileage')
     license_plate = fields.Char(string='License Plate Number')
