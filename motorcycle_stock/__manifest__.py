@@ -7,7 +7,7 @@
     "version": "0.1",
     "category": "Kawiil/Registry",
     "license": "OPL-1",
-    "depends": ["stock"],
+    "depends": ["product"],
     "data": [
     ],
     "demo": [
